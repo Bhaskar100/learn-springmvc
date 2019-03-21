@@ -15,23 +15,27 @@ public class AddController {
 
 	@Autowired
 	AddService addService;
-	
-	@RequestMapping("/add")
-	public ModelAndView add(HttpServletRequest request,HttpServletResponse response) {
-		
-		int i = Integer.parseInt(request.getParameter("t1"));
-		int j = Integer.parseInt(request.getParameter("t2"));
-		
-		
-		
-		int k = addService.add(i, j);
-		
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("display.jsp");
-		mv.addObject("result",k);
-		
-		return mv;
-		
+
+	@RequestMapping("/login")
+	public ModelAndView add(HttpServletRequest request, HttpServletResponse response) {
+
+		String name = request.getParameter("t1");
+		String password = request.getParameter("t2");
+
+		if (name.equals("user") && password.equals("password")) {
+
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("display.jsp");
+			mv.addObject("result", " You Successfully Logined... ");
+
+			return mv;
+		} else {
+
+			ModelAndView mv1 = new ModelAndView();
+			mv1.setViewName("error.jsp");
+			mv1.addObject("result", " Please use valid credentials.. ");
+
+			return mv1;
+		}
 	}
 }
